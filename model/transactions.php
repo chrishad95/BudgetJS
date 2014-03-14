@@ -26,7 +26,12 @@ if (isset($_SESSION['username'])) {
 	
 		} elseif (isset($_GET['account_id']) && !empty($_GET['account_id']) ) {
 			// transactions for an account
-			$transactions = ORM::for_table('transactions')->where('account_id', $_GET['account_id'])->find_array();
+			$transactions = ORM::for_table('transactions')
+				->where_raw('account_id = ? and account_id in (select distinct id from accounts where owner =?)', array( $_GET['account_id'], $username))
+				->order_by_desc('t_date')
+				->find_array();
+			
+			$transactions[count($transactions) -1]['balance'] = 0;
 	
 		} elseif (isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "delete" ) {
 			$transaction = ORM::for_table('transactions')->find_one($_GET['id']);

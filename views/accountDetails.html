@@ -73,6 +73,7 @@
         <th>Date</th>
         <th>Payee</th>
         <th>Amount</th>
+        <th>Balance</th>
         <th>Last Updated</th>
     </tr>
 </thead>
@@ -81,6 +82,7 @@
     <td><a href='' ng-click='modifyTransaction(transaction)'>{{transaction.t_date}}</a></td>
     <td><a >{{transaction.payee}}</a></td>
     <td><div class='text-right'>{{transaction.amount | currency}}</div></td>
+    <td><div class='text-right'>{{transaction.balance | currency}}</div></td>
     <td>{{transaction.updated_at}}</td>
 </tr>
 </tbody>
