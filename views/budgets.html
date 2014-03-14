@@ -1,0 +1,90 @@
+<div class="container-fluid">
+	<div class="row-fluid">
+	  <div class="page-header">Budget Info </div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+	        <div class="span8">
+				<button class="btn btn-default" ng-click="toggleFormButton()">{{formButtonText}}</button>
+				<hr>
+				<div collapse="isCollapsed">
+					<form class='form-horizontal'>
+
+					<div class="form-group">
+					    <label class="control-label col-md-4" for="Transaction Date">Date:</label>
+					    <div class="col-md-6">
+							<p class='input-group'>
+	              			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="newTransfer.t_date" is-open="opened" min="2000-01-01" max="'2015-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+	              			<span class="input-group-btn">
+	                			<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+	              			</span>
+							</p>
+	
+					    </div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-4" for="source_category">Source Category:</label>
+					    <div class="col-md-6">
+							<!-- Select Basic -->
+							    <select id="source_category" name="source_category" ng-model='newTransfer.source_category_id' class="input-xlarge">
+							      <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+							    </select>
+					    </div>
+					</div>
+
+					<div class="form-group">
+						<label class="control-label col-md-4" for="destination_category">Destination Category:</label>
+					    <div class="col-md-6">
+							<!-- Select Basic -->
+							    <select id="destination_category" name="destination_category" ng-model='newTransfer.destination_category_id' class="input-xlarge">
+							      <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+							    </select>
+					    </div>
+					</div>
+
+					<div class="form-group">
+					    <label class="control-label col-md-4" for="Transfer Amount">Transfer Amount:</label>
+					    <div class="col-md-6">
+							<div class="input-group">
+					        <input type="text" class="form-control" id="amount" ng-model='newTransfer.amount' name="amount" value='{{editTransaction.amount}}' placeholder="Amount" />
+							</div>
+					    </div>
+					</div>
+
+					<div class="form-group">
+					    <label class="control-label col-md-4" for="Transfer Memo">Memo:</label>
+					    <div class="col-md-6">
+					        <input type="text" class="form-control" id="memo" ng-model='newTransfer.memo' name="memo" value='{{newTransfer.memo}}' placeholder="Memo" />
+					    </div>
+					</div>
+
+	
+	    			<div class="form-actions">
+	    				<button ng-click='createTransfer()'  class="btn btn-large btn-primary">Create Transfer</button>
+	    			</div>
+					</form>
+	
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<table class="table table-bordered table-striped table-hover">
+	<thead>
+	    <tr>
+	        <th>Category</th>
+	        <th>Total</th>
+	    </tr>
+	</thead>
+	<tbody>
+	<tr data-ng-repeat='budget in budgets' class="budgetRow">
+	    <td><a >{{budget.category_name}}</a></td>
+	    <td><div class='text-right'>{{budget.total | currency}}</div></td>
+	</tr>
+	</tbody>
+	</table>
+</div>
+
+

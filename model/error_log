@@ -1,0 +1,315 @@
+[13-Mar-2014 15:54:51] Got a GET for categories
+[13-Mar-2014 15:54:52] Groceries
+[13-Mar-2014 15:54:52] Gasoline
+[13-Mar-2014 15:54:52] Household
+[13-Mar-2014 15:54:52] Unassigned
+[13-Mar-2014 15:54:52] Dining Out
+[13-Mar-2014 15:55:22] Groceries
+[13-Mar-2014 15:55:22] Gasoline
+[13-Mar-2014 15:55:22] Household
+[13-Mar-2014 15:55:22] Unassigned
+[13-Mar-2014 15:55:22] Dining Out
+[13-Mar-2014 15:55:22] Got a GET for categories
+[13-Mar-2014 15:58:16] Groceries
+[13-Mar-2014 15:58:16] Gasoline
+[13-Mar-2014 15:58:16] Household
+[13-Mar-2014 15:58:16] Unassigned
+[13-Mar-2014 15:58:16] Dining Out
+[13-Mar-2014 15:58:16] Got a GET for categories
+[13-Mar-2014 15:58:32] Groceries
+[13-Mar-2014 15:58:32] Gasoline
+[13-Mar-2014 15:58:32] Household
+[13-Mar-2014 15:58:32] Unassigned
+[13-Mar-2014 15:58:32] Dining Out
+[13-Mar-2014 15:58:32] Got a GET for categories
+[13-Mar-2014 15:59:35] Groceries
+[13-Mar-2014 15:59:35] Gasoline
+[13-Mar-2014 15:59:35] Household
+[13-Mar-2014 15:59:35] Unassigned
+[13-Mar-2014 15:59:35] Dining Out
+[13-Mar-2014 15:59:35] Got a GET for categories
+[13-Mar-2014 16:02:00] Got a GET for categories
+[13-Mar-2014 16:02:00] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'as category_name sum(a.amount) as total from budget_transfers a left join catego' at line 1' in /home2/taylorbe/public_html/budget/model/idiorm.php:413
+Stack trace:
+#0 /home2/taylorbe/public_html/budget/model/idiorm.php(413): PDOStatement->execute(Array)
+#1 /home2/taylorbe/public_html/budget/model/idiorm.php(1605): ORM::_execute('select c.name, ...', Array, 'default')
+#2 /home2/taylorbe/public_html/budget/model/idiorm.php(613): ORM->_run()
+#3 /home2/taylorbe/public_html/budget/model/idiorm.php(602): ORM->_find_many()
+#4 /home2/taylorbe/public_html/budget/model/budgets.php(38): ORM->find_many()
+#5 {main}
+  thrown in /home2/taylorbe/public_html/budget/model/idiorm.php on line 413
+[13-Mar-2014 16:06:28] Got a GET for categories
+[13-Mar-2014 16:06:28] Groceries
+[13-Mar-2014 16:06:28] Gasoline
+[13-Mar-2014 16:06:28] Household
+[13-Mar-2014 16:06:28] Unassigned
+[13-Mar-2014 16:06:28] Dining Out
+[13-Mar-2014 16:06:28] Groceries
+[13-Mar-2014 16:06:28] Gasoline
+[13-Mar-2014 16:06:28] Household
+[13-Mar-2014 16:06:28] Unassigned
+[13-Mar-2014 16:06:28] Dining Out
+[13-Mar-2014 16:07:12] Groceries
+[13-Mar-2014 16:07:12] Gasoline
+[13-Mar-2014 16:07:12] Household
+[13-Mar-2014 16:07:12] Unassigned
+[13-Mar-2014 16:07:12] Dining Out
+[13-Mar-2014 16:07:12] Groceries
+[13-Mar-2014 16:07:12] Gasoline
+[13-Mar-2014 16:07:12] Household
+[13-Mar-2014 16:07:12] Unassigned
+[13-Mar-2014 16:07:12] Dining Out
+[13-Mar-2014 16:07:58] Groceries
+[13-Mar-2014 16:07:58] Gasoline
+[13-Mar-2014 16:07:58] Household
+[13-Mar-2014 16:07:58] Unassigned
+[13-Mar-2014 16:07:58] Dining Out
+[13-Mar-2014 16:07:58] Groceries
+[13-Mar-2014 16:07:58] Gasoline
+[13-Mar-2014 16:07:58] Household
+[13-Mar-2014 16:07:58] Unassigned
+[13-Mar-2014 16:07:58] Dining Out
+[13-Mar-2014 16:08:18] Groceries
+[13-Mar-2014 16:08:18] Gasoline
+[13-Mar-2014 16:08:18] Household
+[13-Mar-2014 16:08:18] Unassigned
+[13-Mar-2014 16:08:18] Dining Out
+[13-Mar-2014 16:08:18] Groceries
+[13-Mar-2014 16:08:18] Gasoline
+[13-Mar-2014 16:08:18] Household
+[13-Mar-2014 16:08:18] Unassigned
+[13-Mar-2014 16:08:18] Dining Out
+[13-Mar-2014 16:08:18] Got a GET for categories
+[13-Mar-2014 16:09:02] PHP Notice:  Undefined property: stdClass::$memo in /home2/taylorbe/public_html/budget/model/budgets.php on line 88
+[13-Mar-2014 16:09:02] Groceries
+[13-Mar-2014 16:09:02] Gasoline
+[13-Mar-2014 16:09:02] Household
+[13-Mar-2014 16:09:02] Unassigned
+[13-Mar-2014 16:09:02] Dining Out
+[13-Mar-2014 16:09:02] Groceries
+[13-Mar-2014 16:09:02] Gasoline
+[13-Mar-2014 16:09:02] Household
+[13-Mar-2014 16:09:02] Unassigned
+[13-Mar-2014 16:09:02] Dining Out
+[13-Mar-2014 16:09:28] Groceries
+[13-Mar-2014 16:09:28] Gasoline
+[13-Mar-2014 16:09:28] Household
+[13-Mar-2014 16:09:28] Unassigned
+[13-Mar-2014 16:09:28] Dining Out
+[13-Mar-2014 16:09:28] Groceries
+[13-Mar-2014 16:09:28] Gasoline
+[13-Mar-2014 16:09:28] Household
+[13-Mar-2014 16:09:28] Unassigned
+[13-Mar-2014 16:09:28] Dining Out
+[13-Mar-2014 16:19:24] Groceries
+[13-Mar-2014 16:19:24] Gasoline
+[13-Mar-2014 16:19:24] Household
+[13-Mar-2014 16:19:24] Unassigned
+[13-Mar-2014 16:19:24] Dining Out
+[13-Mar-2014 16:19:24] Groceries
+[13-Mar-2014 16:19:24] Gasoline
+[13-Mar-2014 16:19:24] add 700 to -18
+[13-Mar-2014 16:19:24] Household
+[13-Mar-2014 16:19:24] Unassigned
+[13-Mar-2014 16:19:24] Dining Out
+[13-Mar-2014 16:19:28] Groceries
+[13-Mar-2014 16:19:28] Gasoline
+[13-Mar-2014 16:19:28] Household
+[13-Mar-2014 16:19:28] Unassigned
+[13-Mar-2014 16:19:28] Dining Out
+[13-Mar-2014 16:19:28] Groceries
+[13-Mar-2014 16:19:28] Gasoline
+[13-Mar-2014 16:19:28] add 700 to -18
+[13-Mar-2014 16:19:28] Household
+[13-Mar-2014 16:19:28] Unassigned
+[13-Mar-2014 16:19:28] Dining Out
+[13-Mar-2014 16:20:42] Groceries
+[13-Mar-2014 16:20:42] Gasoline
+[13-Mar-2014 16:20:42] Household
+[13-Mar-2014 16:20:42] Unassigned
+[13-Mar-2014 16:20:42] Dining Out
+[13-Mar-2014 16:20:42] Groceries
+[13-Mar-2014 16:20:42] Gasoline
+[13-Mar-2014 16:20:42] add 200 to -18
+[13-Mar-2014 16:20:42] Household
+[13-Mar-2014 16:20:42] Unassigned
+[13-Mar-2014 16:20:42] Dining Out
+[13-Mar-2014 16:21:19] Groceries
+[13-Mar-2014 16:21:19] Gasoline
+[13-Mar-2014 16:21:19] Household
+[13-Mar-2014 16:21:19] Unassigned
+[13-Mar-2014 16:21:19] Dining Out
+[13-Mar-2014 16:21:19] Groceries
+[13-Mar-2014 16:21:19] Gasoline
+[13-Mar-2014 16:21:19] add 200 to -18
+[13-Mar-2014 16:21:19] Household
+[13-Mar-2014 16:21:19] Unassigned
+[13-Mar-2014 16:21:19] Dining Out
+[13-Mar-2014 16:21:28] Groceries
+[13-Mar-2014 16:21:28] Gasoline
+[13-Mar-2014 16:21:28] Household
+[13-Mar-2014 16:21:28] Unassigned
+[13-Mar-2014 16:21:28] Dining Out
+[13-Mar-2014 16:21:28] Groceries
+[13-Mar-2014 16:21:28] Gasoline
+[13-Mar-2014 16:21:28] add 200 to -18
+[13-Mar-2014 16:21:28] Household
+[13-Mar-2014 16:21:28] Unassigned
+[13-Mar-2014 16:21:28] Dining Out
+[13-Mar-2014 16:22:30] Groceries
+[13-Mar-2014 16:22:30] Gasoline
+[13-Mar-2014 16:22:30] Household
+[13-Mar-2014 16:22:30] Unassigned
+[13-Mar-2014 16:22:30] Dining Out
+[13-Mar-2014 16:22:30] Groceries
+[13-Mar-2014 16:22:30] add 500 to -787.1100003812462
+[13-Mar-2014 16:22:30] Gasoline
+[13-Mar-2014 16:22:30] Household
+[13-Mar-2014 16:22:30] Unassigned
+[13-Mar-2014 16:22:30] Dining Out
+[13-Mar-2014 16:23:38] calculate budget totals
+[13-Mar-2014 16:23:38] Groceries
+[13-Mar-2014 16:23:38] Gasoline
+[13-Mar-2014 16:23:38] Household
+[13-Mar-2014 16:23:38] Unassigned
+[13-Mar-2014 16:23:38] Dining Out
+[13-Mar-2014 16:23:38] Groceries
+[13-Mar-2014 16:23:38] add 500 to -787.1100003812462
+[13-Mar-2014 16:23:38] Gasoline
+[13-Mar-2014 16:23:38] Household
+[13-Mar-2014 16:23:38] Unassigned
+[13-Mar-2014 16:23:38] Dining Out
+[13-Mar-2014 16:25:25] calculate budget totals
+[13-Mar-2014 16:25:25] Unassigned
+[13-Mar-2014 16:25:25] add 700 to 1500
+[13-Mar-2014 16:25:25] Groceries
+[13-Mar-2014 16:25:25] add 500 to -787.1100003812462
+[13-Mar-2014 16:26:21] calculate budget totals
+[13-Mar-2014 16:26:21] Unassigned
+[13-Mar-2014 16:26:21] subtract 700 from 1500
+[13-Mar-2014 16:26:21] Groceries
+[13-Mar-2014 16:26:21] add 500 to -787.1100003812462
+[13-Mar-2014 16:56:39] calculate budget totals
+[13-Mar-2014 16:56:39] PHP Notice:  Undefined variable: b in /home2/taylorbe/public_html/budget/model/budgets.php on line 42
+[13-Mar-2014 16:56:39] Transfer from 
+[13-Mar-2014 16:56:39] Unassigned
+[13-Mar-2014 16:56:39] subtract 700 from 1500
+[13-Mar-2014 16:56:39] Transfer to Dining Out
+[13-Mar-2014 16:56:39] Groceries
+[13-Mar-2014 16:56:39] add 500 to -787.1100003812462
+[13-Mar-2014 16:57:20] calculate budget totals
+[13-Mar-2014 16:57:20] Transfer from Unassigned
+[13-Mar-2014 16:57:20] Unassigned
+[13-Mar-2014 16:57:20] subtract 700 from 1500
+[13-Mar-2014 16:57:20] Transfer to Groceries
+[13-Mar-2014 16:57:20] Groceries
+[13-Mar-2014 16:57:20] add 500 to -787.1100003812462
+[13-Mar-2014 16:59:27] calculate budget totals
+[13-Mar-2014 16:59:27] Transfer from Unassigned
+[13-Mar-2014 16:59:27] Unassigned
+[13-Mar-2014 16:59:27] subtract 500 from 1500
+[13-Mar-2014 16:59:27] Transfer to Groceries
+[13-Mar-2014 16:59:27] Groceries
+[13-Mar-2014 16:59:27] add 500 to -787.1100003812462
+[13-Mar-2014 17:02:43] Got a GET for categories
+[13-Mar-2014 17:06:08] calculate budget totals
+[13-Mar-2014 17:06:08] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:06:08] add 500 to -787.1100003812462
+[13-Mar-2014 17:06:08] subtract 500 from 1500
+[13-Mar-2014 17:07:26] calculate budget totals
+[13-Mar-2014 17:07:26] PHP Fatal error:  Call to a member function count() on a non-object in /home2/taylorbe/public_html/budget/model/budgets.php on line 40
+[13-Mar-2014 17:07:56] calculate budget totals
+[13-Mar-2014 17:07:56] PHP Fatal error:  Call to undefined function  length() in /home2/taylorbe/public_html/budget/model/budgets.php on line 40
+[13-Mar-2014 17:10:52] calculate budget totals
+[13-Mar-2014 17:10:52] Found 1
+[13-Mar-2014 17:10:52] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:10:52] add 500 to -787.1100003812462
+[13-Mar-2014 17:10:52] subtract 500 from 1500
+[13-Mar-2014 17:14:22] calculate budget totals
+[13-Mar-2014 17:14:23] Found 1
+[13-Mar-2014 17:14:23] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:14:23] add 500 to -787.1100003812462
+[13-Mar-2014 17:14:23] subtract 500 from 1500
+[13-Mar-2014 17:14:42] calculate budget totals
+[13-Mar-2014 17:14:42] Found 1
+[13-Mar-2014 17:14:42] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:14:42] add 500 to -787.1100003812462
+[13-Mar-2014 17:14:42] subtract 500 from 1500
+[13-Mar-2014 17:14:44] calculate budget totals
+[13-Mar-2014 17:14:44] Found 1
+[13-Mar-2014 17:14:44] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:14:44] add 500 to -787.1100003812462
+[13-Mar-2014 17:14:44] subtract 500 from 1500
+[13-Mar-2014 17:16:00] calculate budget totals
+[13-Mar-2014 17:16:00] Found 1
+[13-Mar-2014 17:16:00] Transfer from Unassigned to Groceries
+[13-Mar-2014 17:23:52] calculate budget totals
+[13-Mar-2014 17:23:52] Found 1
+[13-Mar-2014 17:23:52] Transfer  from Unassigned to Groceries
+[13-Mar-2014 17:23:52] add 500 to -787.1100003812462
+[13-Mar-2014 17:23:52] subtract 500 from 1500
+[13-Mar-2014 17:24:48] calculate budget totals
+[13-Mar-2014 17:24:48] Found 1
+[13-Mar-2014 17:24:48] Transfer 500 from Unassigned to Groceries
+[13-Mar-2014 17:24:48] add 500 to -787.1100003812462
+[13-Mar-2014 17:24:48] subtract 500 from 1500
+[13-Mar-2014 17:25:22] calculate budget totals
+[13-Mar-2014 17:25:22] Found 1
+[13-Mar-2014 17:25:22] Transfer 100 from Unassigned to Household
+[13-Mar-2014 17:25:22] add 100 to -22
+[13-Mar-2014 17:25:22] subtract 100 from 1500
+[13-Mar-2014 17:25:29] calculate budget totals
+[13-Mar-2014 17:25:29] Found 1
+[13-Mar-2014 17:25:29] Transfer 100 from Unassigned to Household
+[13-Mar-2014 17:25:29] add 100 to -22
+[13-Mar-2014 17:25:29] subtract 100 from 1500
+[13-Mar-2014 18:53:31] calculate budget totals
+[13-Mar-2014 18:53:31] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:53:35] calculate budget totals
+[13-Mar-2014 18:53:35] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:54:55] calculate budget totals
+[13-Mar-2014 18:54:55] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:54:55] PHP Notice:  Trying to get property of non-object in /home2/taylorbe/public_html/budget/model/budgets.php on line 53
+[13-Mar-2014 18:54:55] Transfer  from  to 
+[13-Mar-2014 18:54:55] Transfer  from  to 
+[13-Mar-2014 18:54:55] Transfer  from  to 
+[13-Mar-2014 18:55:52] calculate budget totals
+[13-Mar-2014 18:55:52] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:55:52] Transfer 200 from Unassigned to Gasoline
+[13-Mar-2014 18:55:52] Transfer 500 from Unassigned to Groceries
+[13-Mar-2014 18:55:52] Transfer 100 from Unassigned to Household
+[13-Mar-2014 18:57:28] calculate budget totals
+[13-Mar-2014 18:57:28] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:57:28] Transfer 200 from Unassigned to Gasoline
+[13-Mar-2014 18:57:28] Transfer 500 from Unassigned to Groceries
+[13-Mar-2014 18:57:28] Transfer 100 from Unassigned to Household
+[13-Mar-2014 18:57:43] Got a GET for categories
+[13-Mar-2014 18:57:43] calculate budget totals
+[13-Mar-2014 18:57:43] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 18:57:43] Transfer 200 from Unassigned to Gasoline
+[13-Mar-2014 18:57:43] Transfer 500 from Unassigned to Groceries
+[13-Mar-2014 18:57:43] Transfer 100 from Unassigned to Household
+[13-Mar-2014 19:01:24] Got a GET for categories
+[13-Mar-2014 19:01:28] Got a GET for categories
+[13-Mar-2014 19:19:59] Got a GET for categories
+[13-Mar-2014 19:30:14] Got a GET for categories
+[13-Mar-2014 19:30:20] Got a GET for categories
+[13-Mar-2014 19:30:20] calculate budget totals
+[13-Mar-2014 19:30:20] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[13-Mar-2014 19:30:20] Transfer 200 from Unassigned to Gasoline
+[13-Mar-2014 19:30:20] Transfer 500 from Unassigned to Groceries
+[13-Mar-2014 19:30:20] Transfer 100 from Unassigned to Household
+[14-Mar-2014 07:15:19] Got a GET for categories
+[14-Mar-2014 07:15:19] calculate budget totals
+[14-Mar-2014 07:15:19] [{"source_category_name":"Unassigned","destination_category_name":"Gasoline","total":"200"},{"source_category_name":"Unassigned","destination_category_name":"Groceries","total":"500"},{"source_category_name":"Unassigned","destination_category_name":"Household","total":"100"}]
+[14-Mar-2014 07:15:19] Transfer 200 from Unassigned to Gasoline
+[14-Mar-2014 07:15:19] Transfer 500 from Unassigned to Groceries
+[14-Mar-2014 07:15:19] Transfer 100 from Unassigned to Household
+[14-Mar-2014 07:16:00] requestData->data: {"username":"chadley","password":"tun99bar"}
+[14-Mar-2014 07:16:37] Got a GET for categories
+[14-Mar-2014 07:16:51] Got a GET for categories
+[14-Mar-2014 07:17:14] Got a PUT for transactions
+[14-Mar-2014 07:17:14] CREATE a transaction
+[14-Mar-2014 07:17:14] 2
+[14-Mar-2014 07:17:14] 2
+[14-Mar-2014 07:17:14] PHP Notice:  Undefined property: stdClass::$memo in /home2/taylorbe/public_html/budget/model/transactions.php on line 84

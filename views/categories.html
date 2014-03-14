@@ -1,0 +1,46 @@
+<div class="container-fluid">
+<div class="row-fluid">
+  <div class="page-header">Categories</div>
+</div>
+
+<div class="container">
+	<div class="row">
+        <div class="span8">
+			<button class="btn btn-default" ng-click="toggleFormButton()">{{toggleButtonText}}</button>
+			<hr>
+			<div collapse="editFormIsCollapsed">
+				<form class='form-horizontal'>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Category Name">Category Name:</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="name" ng-model='editCategory.name' name="name" value='{{editCategory.name}}' placeholder="Category Name" />
+				    </div>
+				</div>
+    			<div class="form-actions">
+    				<button ng-click='createCategory()'  class="btn btn-large btn-primary">Create Category</button>
+    			</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Last Updated</th>
+    </tr>
+</thead>
+<tbody>
+<tr data-ng-repeat='category in categories' class="categoryRow">
+    <td><a >{{category.name}}</a></td>
+    <td>{{category.updated_at}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+<div class="row-fluid">
+  <div class="page-header">Accounts for {{username}}</div>
+</div>
+
+<div class="container">
+	<div class="row">
+        <div class="span8">
+			<button class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Show Account Form</button>
+			<hr>
+			<div collapse="isCollapsed">
+				<form class='form-horizontal'>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Account Name">Account Name</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="account_name" ng-model='editAccount.name' name="account_name" value='{{editAccount.name}}' placeholder="Account Name" />
+				    </div>
+				</div>
+
+    			<div class="form-actions">
+    				<button ng-click='createAccount(editAccount.name)'  class="btn btn-large btn-primary">Create Account</button>
+    			</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+<thead>
+    <tr>
+        <th>Account Name</th>
+        <th>Owner</th>
+        <th>Last Updated</th>
+    </tr>
+</thead>
+<tbody>
+<tr data-ng-repeat='account in accounts' class="accountRow">
+    <td><a href='#/accounts/{{account.id}}'>{{account.name}}</a></td>
+    <td>{{account.owner}}</td>
+    <td>{{account.updated_at}}</td>
+</tr>
+</tbody>
+</table>
+
+<button class="btn btn-default" ng-click="showAccount()">Debug Account Id</button>
+</div>
+

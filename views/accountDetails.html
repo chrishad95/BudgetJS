@@ -1,0 +1,90 @@
+<div class="container-fluid">
+<div class="row-fluid">
+  <div class="page-header">Transactions for {{account.name}}</div>
+</div>
+
+<div class="container">
+	<div class="row">
+        <div class="span8">
+			<button class="btn btn-default" ng-click="toggleFormButton()">{{transactionButtonText}}</button>
+			<hr>
+			<div collapse="isCollapsed">
+				<form class='form-horizontal'>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Date">Date:</label>
+				    <div class="col-md-6">
+						<p class='input-group'>
+              			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="editTransaction.t_date" is-open="opened" min="2000-01-01" max="'2015-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+              			<span class="input-group-btn">
+                			<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              			</span>
+						</p>
+
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Payee">Payee:</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="payee" ng-model='editTransaction.payee' name="payee" value='{{editTransaction.payee}}' placeholder="Payee" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Amount">Amount:</label>
+				    <div class="col-md-6">
+						<div class="input-group">
+				        <input type="text" class="form-control" id="amount" ng-model='editTransaction.amount' name="amount" value='{{editTransaction.amount}}' placeholder="Amount" />
+						<span class="input-group-btn">
+						<button type="button" class="btn btn-primary" ng-click='changeTransactionType()'>
+							{{transactionType}}
+					    </button>
+						</span>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Memo">Memo:</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="memo" ng-model='editTransaction.memo' name="memo" value='{{editTransaction.memo}}' placeholder="Memo" />
+				    </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-4" for="selectbasic">Category:</label>
+				    <div class="col-md-6">
+						<!-- Select Basic -->
+						    <select id="selectbasic" name="selectbasic" ng-model='editTransaction.category_id' class="input-xlarge">
+						      <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+						    </select>
+				    </div>
+				</div>
+
+    			<div class="form-actions">
+    				<button ng-click='createTransaction()'  class="btn btn-large btn-primary">Create Transaction</button>
+    			</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+<thead>
+    <tr>
+        <th>Date</th>
+        <th>Payee</th>
+        <th>Amount</th>
+        <th>Last Updated</th>
+    </tr>
+</thead>
+<tbody>
+<tr data-ng-repeat='transaction in transactions' class="transactionRow">
+    <td><a href='' ng-click='modifyTransaction(transaction)'>{{transaction.t_date}}</a></td>
+    <td><a >{{transaction.payee}}</a></td>
+    <td><div class='text-right'>{{transaction.amount | currency}}</div></td>
+    <td>{{transaction.updated_at}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
