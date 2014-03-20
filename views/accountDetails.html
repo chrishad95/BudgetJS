@@ -1,92 +1,49 @@
+<style>
+.show-grid {
+border: 1px solid #ccc;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+</style>
 <div class="container-fluid">
-<div class="row-fluid">
-  <div class="page-header">Transactions for {{account.name}}</div>
-</div>
+	<div class="row-fluid">
+	  <div class="page-header">Transactions for {{account.name}}</div>
+	</div>
+	<button class="btn btn-default" ng-click="showTransactionForm()">New Transaction</button>
+	<div class="row" >
+		<div class='show-grid col-md-4'>Payee</div>
+		<div class='show-grid col-xs-1'>Cleared</div>
+	    <div class='show-grid col-md-2 text-right'>Amount</div>
+	    <div class='show-grid col-md-2 text-right'>Balance</div>
+	</div>
+	<div data-ng-repeat='transaction in transactions'>
+		<div class="row">
+			<div class='show-grid col-md-4'>
+			<a href="" class="dropdown-toggle">{{transaction.payee}}</a>
+			<ul class="dropdown-menu">
+				<li>Show Transactions For Payee</li>
+				<li><a href="" ng-click='deleteTransaction(transaction.id)'>Delete Transaction</a></li>
+				<li>Edit Transaction</li>
+			</ul>
+			<a href="" ng-if='transaction.matches' ng-click='showDetails(transaction.id)'><span class="label label-success">Matches</span></a>
 
-<div class="container">
-	<div class="row">
-        <div class="span8">
-			<button class="btn btn-default" ng-click="toggleFormButton()">{{transactionButtonText}}</button>
-			<hr>
-			<div collapse="isCollapsed">
-				<form class='form-horizontal'>
-				<div class="form-group">
-				    <label class="control-label col-md-4" for="Transaction Date">Date:</label>
-				    <div class="col-md-6">
-						<p class='input-group'>
-              			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="editTransaction.t_date" is-open="opened" min="2000-01-01" max="'2015-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
-              			<span class="input-group-btn">
-                			<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              			</span>
-						</p>
-
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label class="control-label col-md-4" for="Transaction Payee">Payee:</label>
-				    <div class="col-md-6">
-				        <input type="text" class="form-control" id="payee" ng-model='editTransaction.payee' name="payee" value='{{editTransaction.payee}}' placeholder="Payee" />
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label class="control-label col-md-4" for="Transaction Amount">Amount:</label>
-				    <div class="col-md-6">
-						<div class="input-group">
-				        <input type="text" class="form-control" id="amount" ng-model='editTransaction.amount' name="amount" value='{{editTransaction.amount}}' placeholder="Amount" />
-						<span class="input-group-btn">
-						<button type="button" class="btn btn-primary" ng-click='changeTransactionType()'>
-							{{transactionType}}
-					    </button>
-						</span>
-						</div>
-				    </div>
-				</div>
-				<div class="form-group">
-				    <label class="control-label col-md-4" for="Transaction Memo">Memo:</label>
-				    <div class="col-md-6">
-				        <input type="text" class="form-control" id="memo" ng-model='editTransaction.memo' name="memo" value='{{editTransaction.memo}}' placeholder="Memo" />
-				    </div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-4" for="selectbasic">Category:</label>
-				    <div class="col-md-6">
-						<!-- Select Basic -->
-						    <select id="selectbasic" name="selectbasic" ng-model='editTransaction.category_id' class="input-xlarge">
-						      <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
-						    </select>
-				    </div>
-				</div>
-
-    			<div class="form-actions">
-    				<button ng-click='createTransaction()'  class="btn btn-large btn-primary">Create Transaction</button>
-    			</div>
-				</form>
-
+			</div>
+	    	<div class='show-grid col-xs-1 text-right'>{{transaction.reconciled}}</div>
+	    	<div class='show-grid col-md-2 text-right'>{{transaction.amount | currency}}</div>
+	    	<div class='show-grid col-md-2 text-right'>{{transaction.balance | currency}}</div>
+		</div>
+		<div ng-if='showTransactionDetails == transaction.id' class="row">
+			<div ng-repeat='match in transaction.matches'>
+			<div class='show-grid col-md-4'>
+			<a href="">{{match.payee}}</a>
+			<a href="" ng-click='acceptMatch(transaction.id, match.id)'><span class="label label-success">Accept</span></a>
+			</div>
+	    	<div class='show-grid col-md-2 text-right'>{{match.amount | currency}}</div>
+	    	<div class='show-grid col-md-2 text-right'>{{match.balance | currency}}</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<table class="table table-bordered table-striped table-hover">
-<thead>
-    <tr>
-        <th>Date</th>
-        <th>Payee</th>
-        <th>Amount</th>
-        <th>Balance</th>
-        <th>Last Updated</th>
-    </tr>
-</thead>
-<tbody>
-<tr data-ng-repeat='transaction in transactions' class="transactionRow">
-    <td><a href='' ng-click='modifyTransaction(transaction)'>{{transaction.t_date}}</a></td>
-    <td><a >{{transaction.payee}}</a></td>
-    <td><div class='text-right'>{{transaction.amount | currency}}</div></td>
-    <td><div class='text-right'>{{transaction.balance | currency}}</div></td>
-    <td>{{transaction.updated_at}}</td>
-</tr>
-</tbody>
-</table>
 </div>
 
 

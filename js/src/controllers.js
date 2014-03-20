@@ -15,6 +15,11 @@ budgetApp.config(['$routeProvider',
 					controller: 'LoginController',
 					templateUrl: 'views/login.html'
 				})
+			.when('/logout',
+				{
+					controller: 'LoginController',
+					templateUrl: 'views/login.html'
+				})
 			.when('/register',
 				{
 					controller: 'RegisterController',
@@ -34,6 +39,11 @@ budgetApp.config(['$routeProvider',
 				{
 					controller: 'CategoryController',
 					templateUrl: 'views/categories.html'
+				})
+			.when('/imported_transactions/:account_id',
+				{
+					controller: 'ImportedTransactionsController',
+					templateUrl: 'views/imported_transactions.html'
 				})
 			.when('/accounts/:account_id',
 				{
@@ -174,7 +184,12 @@ budgetApp.controller('RegisterController', function ($scope, authModel, $locatio
 budgetApp.controller('LoginController', function ($scope, authModel, $location) {
 	$scope.username = "";
 	$scope.password = "";
-
+	if ($location.path() == "/logout") {
+		console.log("Logging out.");
+		authModel.logout().then( function(data) {
+			console.log("Logged out.");
+		});
+	}
 	$scope.login = function () {
 		console.log("Do login: " + $scope.username);
 
@@ -244,6 +259,21 @@ budgetApp.controller('BudgetController', function ($scope, budgetModel, $routePa
 
 });
 
+budgetApp.controller('ImportedTransactionsController', function ($scope, budgetModel, $routeParams) {
+	$scope.imported_transactions = [];
+
+	budgetModel.getAccountById($routeParams.account_id).then( function(data) {
+		$scope.account = data[0];
+		budgetModel.getImportedTransactionsForAccount($routeParams.account_id).then( function(data) {
+			$scope.imported_transactions = data;
+		});
+	});
+	$scope.debug_it = function (obj) {
+		console.log(obj);
+	};
+
+});
+
 budgetApp.controller('CategoryController', function ($scope, budgetModel, $routeParams) {
 	$scope.category = {};
 	$scope.categories = [];
@@ -277,7 +307,7 @@ budgetApp.controller('CategoryController', function ($scope, budgetModel, $route
 
 });
 	
-budgetApp.controller('AccountViewController', function ($scope, budgetModel, $routeParams) {
+budgetApp.controller('AccountViewController', function ($scope, budgetModel, $routeParams, $modal) {
 
 	$scope.account = {};
 	$scope.transactions = [];
@@ -285,9 +315,23 @@ budgetApp.controller('AccountViewController', function ($scope, budgetModel, $ro
 	$scope.editTransaction = {};
 	$scope.transactionButtonText = "Show Transaction Form";
 	$scope.categories = [];
+	$scope.detailsFlags = [];
+	$scope.showAllDetails = false;
 
+	budgetModel.getCategories().then( function(data) {
+		$scope.categories = data;
+	});
+	budgetModel.getAccountById($routeParams.account_id).then( function(data) {
+		$scope.account = data[0];
+		budgetModel.getTransactionsForAccount($routeParams.account_id).then( function(data) {
+			$scope.transactions = data;
+		});
+	});
+
+
+
+	// transaction form stuff
 	$scope.transactionType = "Withdrawal";
-
 	$scope.changeTransactionType = function () {
 		if ($scope.transactionType == "Withdrawal") {
 			$scope.transactionType = "Deposit";
@@ -307,30 +351,38 @@ budgetApp.controller('AccountViewController', function ($scope, budgetModel, $ro
 	$scope.dateOptions = {
 	
 	};
+	$scope.opened = false;
 	$scope.format = 'MM-dd-yyyy';
 	$scope.open = function($event) {
+		console.log("open dp");
 		$event.preventDefault();
 		$event.stopPropagation();
 		$scope.opened = true;
 	};
 
-	budgetModel.getCategories().then( function(data) {
-		$scope.categories = data;
-	});
-	budgetModel.getAccountById($routeParams.account_id).then( function(data) {
-		$scope.account = data[0];
-		budgetModel.getTransactionsForAccount($routeParams.account_id).then( function(data) {
-			$scope.transactions = data;
+
+	$scope.showTransactionForm = function () {
+		var modalInstance = $modal.open({
+			templateUrl: 'views/transactionForm.html',
+			controller: TransactionModalController,
+			scope: $scope
 		});
-	});
-	$scope.toggleFormButton = function () {
-		$scope.isCollapsed = !$scope.isCollapsed;
-		if ($scope.isCollapsed) {
-			$scope.transactionButtonText = "Show Transaction Form";
-		} else {
-			$scope.transactionButtonText = "Hide Transaction Form";
-		}
+		modalInstance.result.then( function (transaction) {
+			budgetModel.createTransaction(transaction).then( function(data) {
+				$scope.transactions = data;
+			});
+		}, function () {
+			// modal dismissed
+		});
 	};
+	$scope.deleteTransaction = function(id) {
+		budgetModel.deleteTransaction(id).then( function(data) {
+			budgetModel.getTransactionsForAccount($scope.account.id).then( function(data) {
+				$scope.transactions = data;
+			});
+		});
+	};
+
 	$scope.createTransaction = function () {
 		$scope.editTransaction.account_id = $scope.account.id;
 		if ($scope.transactionType == "Withdrawal") {
@@ -349,6 +401,8 @@ budgetApp.controller('AccountViewController', function ($scope, budgetModel, $ro
 
 	};
 	$scope.modifyTransaction = function(t) {
+		console.log(t);
+
 		$scope.editTransaction = JSON.parse(JSON.stringify(t));
 		if ($scope.editTransaction.amount < 0) {
 			$scope.editTransaction.amount *= -1;
@@ -362,23 +416,73 @@ budgetApp.controller('AccountViewController', function ($scope, budgetModel, $ro
 		}
 		console.log($scope.editTransaction);
 	};
+
+	$scope.showDetails = function (id) {
+		console.log("Show Details for " + id);
+		if ($scope.showTransactionDetails == id) {
+			$scope.showTransactionDetails = null;
+		} else {
+			$scope.showTransactionDetails = id;
+		}
+	};
+	$scope.acceptMatch = function (transaction_id, match_id) {
+	
+		budgetModel.acceptMatch(transaction_id, match_id).then( function(data) {
+
+			budgetModel.getTransactionsForAccount($scope.account.id).then( function(data) {
+				$scope.transactions = data;
+			});
+		});
+
+	};
+	
 });
 
-budgetApp.controller('MainController', function ($scope, $routeParams, budgetModel) {
+TransactionModalController = function($scope, $modalInstance) {
+	$scope.ok = function () {
+		$scope.createTransaction();
+		$modalInstance.close();
+	};
+	$scope.cancel = function ()  {
+		$modalInstance.dismiss('cancel');
+	};
+
+};
+
+AccountModalController = function ($scope, $modalInstance) {
+	$scope.ok = function (obj) {
+		$modalInstance.close(obj.name);
+	};
+	$scope.cancel = function ()  {
+		$modalInstance.dismiss('cancel');
+	};
+};
+
+budgetApp.controller('MainController', function ($scope, $routeParams, budgetModel, $modal) {
 	$scope.username = "";
 	$scope.selectedAccount = {};
 	$scope.accounts = [];
 	$scope.transactions = [];
 
-	$scope.editAccount = {};
 	$scope.editTransaction = {};
 
 	$scope.isCollapsed = true;
 
-	$scope.showAccount = function () {
-		$scope.dates.push( new Date());
-		console.log($scope.dates);
+	$scope.showNewAccountForm = function () {
+		var modalInstance = $modal.open({
+			templateUrl: 'views/newAccountForm.html',
+			controller: AccountModalController,
+			scope: $scope
 
+		});
+		modalInstance.result.then( function (accountName) {
+			console.log("Try to create account: " + accountName);
+			budgetModel.createAccount(accountName).then( function(data) {
+				$scope.accounts = data;
+			});
+		}, function () {
+			// modal dismissed
+		});
 	};
 
 	$scope.createAccount = function (name) {
@@ -389,15 +493,11 @@ budgetApp.controller('MainController', function ($scope, $routeParams, budgetMod
 	};		
 
 	$scope.selectAccount = function (id) {
-		$scope.somerandomshit = "funny";
 
 		budgetModel.getAccountById(id).then( function(data) {
 			$scope.selectedAccount = data[0];
-			console.log("Inside selectAccount:");
-			console.log( $scope.selectedAccount);
 			budgetModel.getTransactionsForAccount(id).then( function(data) {
 				$scope.transactions = data;
-				console.log($scope.transactions);
 			});
 		});
 	};
@@ -420,6 +520,11 @@ budgetApp.factory('authModel', function ($http) {
 	return {
 		login: function(uid, pwd) {
 			return $http.put('model/auth.php', {data: {username: uid, password: pwd}}).then(function(result) {
+				return result.data;
+			});
+		},
+		logout: function() {
+			return $http.get('model/auth.php', {params: {logout: 'true'}}).then(function(result) {
 				return result.data;
 			});
 		},
@@ -461,6 +566,11 @@ budgetApp.factory('budgetModel', function ($http) {
 				return result.data;
 			});
       },
+      deleteTransaction: function(id) {
+			return $http.get('model/transactions.php', {params: {id: id, delete: true }}).then(function(result) {
+				return result.data;
+			});
+      },
       createTransaction: function(t) {
 			return $http.put('model/transactions.php', {data: t }).then(function(result) {
 				return result.data;
@@ -481,15 +591,29 @@ budgetApp.factory('budgetModel', function ($http) {
 				return result.data;
 			});
       },
+      acceptMatch: function(transaction_id, match_id) {
+			return $http.get('model/imported_transactions.php', {params: {transaction_id: transaction_id, imported_transaction_id: match_id}}).then(function(result) {
+
+				return result.data;
+			});
+
+	  },
       getTransactionsForAccount: function(id) {
 			return $http.get('model/transactions.php', {params: {account_id: id}}).then(function(result) {
-				var c = result.data.length -1;
-				var total = new Number(result.data[c].balance);
+				if (result.data.length > 0) {
+					var c = result.data.length -1;
+					var total = new Number(result.data[c].balance);
 
-				for (var i = c; i>= 0; i--) {
-					total = total + new Number(result.data[i].amount);
-					result.data[i].balance = total;
+					for (var i = c; i>= 0; i--) {
+						total = total + new Number(result.data[i].amount);
+						result.data[i].balance = total;
+					}
 				}
+				return result.data;
+			});
+      },
+      getImportedTransactionsForAccount: function(id) {
+			return $http.get('model/imported_transactions.php', {params: {account_id: id}}).then(function(result) {
 				return result.data;
 			});
       },

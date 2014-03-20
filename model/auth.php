@@ -19,11 +19,17 @@ if ( $_SERVER['REQUEST_METHOD']  == "GET" ) {
 	// username in the session then return that
 	
 	if(isset($_SESSION['username'])) {
-		$auth = array(
-			'username' => $_SESSION['username'],
-			'desciption' => 'Tall dark and handsome.',
-			'last_seen' => date("Y-m-d H:i:s")
-		);
+		if (isset($_GET['logout'])) {
+			$_SESSION['username'] = "";
+			unset($_SESSION['username']);
+			error_log("Logging out ",0);
+		} else {
+			$auth = array(
+				'username' => $_SESSION['username'],
+				'desciption' => 'Tall dark and handsome.',
+				'last_seen' => date("Y-m-d H:i:s")
+			);
+		}
 	}
 } else {
 

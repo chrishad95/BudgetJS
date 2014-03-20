@@ -20,7 +20,19 @@ if (isset($_SESSION['username'])) {
 
 	if  ( $_SERVER['REQUEST_METHOD']  == "GET" ) {
 	
-		if(isset($_GET['id']) && !empty($_GET['id']) ) {
+		if (isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['delete']) ) {
+			error_log("Deleting transaction with id" . $_GET['id'], 0);
+
+
+			$transaction = ORM::for_table('transactions')
+				->join('accounts', array('transactions.account_id', '=', 'accounts.id'))
+				->select('transactions.id')
+				->select('transactions.account_id')
+				->where('transactions.id', $_GET['id'])
+				->where('accounts.owner', $username)
+				->find_one();
+			$transaction->delete();
+		} elseif(isset($_GET['id']) && !empty($_GET['id']) ) {
 			// specific transaction
 			$transactions = ORM::for_table('transactions')->where('id', $_GET['id'])->find_array();
 	
@@ -30,12 +42,21 @@ if (isset($_SESSION['username'])) {
 				->where_raw('account_id = ? and account_id in (select distinct id from accounts where owner =?)', array( $_GET['account_id'], $username))
 				->order_by_desc('t_date')
 				->find_array();
+
+			// potential matches will be very close to the amount, and very close to the date
+			foreach ($transactions as &$transaction) {
+				$transaction['matches']  = ORM::for_table('imported_transactions') 
+					->where_raw(
+						'match_id is null and account_id = ? and account_id in (select distinct id from accounts where owner =?) ' . 
+						' and t_date > ADDDATE(?, INTERVAL -3 DAY) ' .
+						' and t_date < ADDDATE(?, INTERVAL 3 DAY) ' .
+						' and amount > ? and amount < ? ', 
+						array( $_GET['account_id'], $username, $transaction['t_date'], $transaction['t_date'], $transaction['amount'] - 1, $transaction['amount'] + 1  ) )
+					->find_array();
+			}
 			
 			$transactions[count($transactions) -1]['balance'] = 0;
 	
-		} elseif (isset($_GET['id']) && !empty($_GET['id']) && isset($_GET['action']) && !empty($_GET['action']) && $_GET['action'] == "delete" ) {
-			$transaction = ORM::for_table('transactions')->find_one($_GET['id']);
-			$transaction->delete();
 	
 		} else {
 			$transactions = ORM::for_table('transactions')->find_array(); 

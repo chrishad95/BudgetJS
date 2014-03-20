@@ -1,0 +1,59 @@
+<div class="modal-header">
+	<h3>New Transaction</h3>
+</div>
+<div class='modal-body'>
+				<form class='form-horizontal'>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Date">Date:</label>
+				    <div class="col-md-6">
+						<p class='input-group'>
+              			<input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="editTransaction.t_date" is-open="scope.opened" min="2000-01-01" max="'2015-06-22'" datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+              			<span class="input-group-btn">
+                			<button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              			</span>
+						</p>
+
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Payee">Payee:</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="payee" ng-model='editTransaction.payee' name="payee" value='{{editTransaction.payee}}' placeholder="Payee" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Amount">Amount:</label>
+				    <div class="col-md-6">
+						<div class="input-group">
+				        <input type="text" class="form-control" id="amount" ng-model='editTransaction.amount' name="amount" value='{{editTransaction.amount}}' placeholder="Amount" />
+						<span class="input-group-btn">
+						<button type="button" class="btn btn-primary" ng-click='changeTransactionType()'>
+							{{transactionType}}
+					    </button>
+						</span>
+						</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="control-label col-md-4" for="Transaction Memo">Memo:</label>
+				    <div class="col-md-6">
+				        <input type="text" class="form-control" id="memo" ng-model='editTransaction.memo' name="memo" value='{{editTransaction.memo}}' placeholder="Memo" />
+				    </div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-4" for="selectbasic">Category:</label>
+				    <div class="col-md-6">
+						<!-- Select Basic -->
+						    <select id="selectbasic" name="selectbasic" ng-model='editTransaction.category_id' class="input-xlarge">
+						      <option ng-repeat="category in categories" value="{{category.id}}">{{category.name}}</option>
+						    </select>
+				    </div>
+				</div>
+
+				</form>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>
