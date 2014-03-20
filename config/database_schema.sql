@@ -1,9 +1,6 @@
--- --------------------------------------------------------
-
 --
 -- Table structure for table `accounts`
 --
-
 
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
@@ -13,8 +10,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 -- --------------------------------------------------------
 
@@ -36,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `budget_transfers` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
-
 -- --------------------------------------------------------
 
 --
@@ -54,7 +49,6 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
 
 -- --------------------------------------------------------
 
@@ -75,9 +69,9 @@ CREATE TABLE IF NOT EXISTS `imported_transactions` (
   `created_at` datetime NOT NULL,
   `updated_by` varchar(50) NOT NULL,
   `check_number` varchar(20) DEFAULT NULL,
+  `match_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=141 ;
-
 
 -- --------------------------------------------------------
 
@@ -98,9 +92,10 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `created_at` datetime NOT NULL,
   `updated_by` varchar(50) NOT NULL,
   `check_number` varchar(20) DEFAULT NULL,
+  `reconciled` char(1) DEFAULT NULL,
+  `reconciled_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
